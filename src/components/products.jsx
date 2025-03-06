@@ -12,7 +12,7 @@ import {
 // Map of brand names to their respective icons
 const brandIcons = {
   apple: FaApple,
-  dell: FaApple,
+  dell: SiRedhat,
   microsoft: FaWindows,
   asus: SiAsus,
   acer: SiAcer,
@@ -38,7 +38,7 @@ const LaptopCard = ({ brand, model, price, discount, rating, iconSize = 64 }) =>
   const discountedPrice = discount ? price - (price * discount / 100) : null;
   
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+    <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full">
       {/* Discount badge */}
       {discount && (
         <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-1">
@@ -51,8 +51,8 @@ const LaptopCard = ({ brand, model, price, discount, rating, iconSize = 64 }) =>
         <IconComponent size={iconSize} className="text-gray-700" />
       </div>
       
-      {/* Laptop Details */}
-      <div className="p-4">
+      {/* Laptop Details - Using flex-grow to take available space */}
+      <div className="p-4 flex flex-col flex-grow">
         <div className="flex justify-between items-start">
           <div>
             <h3 className="text-lg font-semibold text-gray-800">{brand}</h3>
@@ -85,7 +85,10 @@ const LaptopCard = ({ brand, model, price, discount, rating, iconSize = 64 }) =>
           )}
         </div>
         
-        {/* Add to Cart Button */}
+        {/* Spacer div to push button to bottom - this is key for consistent positioning */}
+        <div className="flex-grow"></div>
+        
+        {/* Add to Cart Button - Always at the bottom */}
         <button className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md transition-colors flex items-center justify-center">
           <FaShoppingCart className="mr-2" />
           Add to Cart
@@ -117,7 +120,7 @@ const LaptopGrid = ({ laptops }) => {
 };
 
 // Example usage with sample data
-const Product = () => {
+const products = () => {
   const sampleLaptops = [
     { id: 1, brand: 'apple', model: 'MacBook Pro 16"', price: 2399.99, discount: 10, rating: 5 },
     { id: 2, brand: 'dell', model: 'XPS 15', price: 1499.99, discount: 0, rating: 4 },
@@ -139,4 +142,4 @@ const Product = () => {
   return <LaptopGrid laptops={sampleLaptops} />;
 };
 
-export default Product;
+export default products;

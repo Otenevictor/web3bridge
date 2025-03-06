@@ -1,6 +1,6 @@
 import './App.css'
 import Navbar from './components/nav'
-import Product from './components/products'
+import Products from './components/products'
 import HomePage from './pages/home'
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <>
     <Navbar/>
     <HomePage/>
-    <Product className=""/>
+    <Products className=""/>
 
      
       
