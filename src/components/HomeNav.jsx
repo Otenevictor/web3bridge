@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {  FaShoppingCart } from 'react-icons/fa';
+// import {  FaShoppingCart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const HomeNav = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const menuRef = useRef(null);
 
-    // Handle scroll event to change navbar style
+    // Handle scroll event to change HomeNav style
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 20) {
@@ -41,20 +41,20 @@ const Navbar = () => {
     const closeMenu = () => setIsOpen(false);
 
     return (
-        <nav className={` top-0 left-0 right-0 z-50 transition-all duration-300 ${
-            scrolled ? 'bg-white shadow-md' : 'bg-blue-600'
+        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+            scrolled ? 'bg-blue-600 shadow-md' : 'bg-white'
         } p-4`}>
             <div className="container mx-auto flex justify-between items-center">
                 <Link to="/" className={`text-2xl font-semibold hover:text-gray-400 transition-colors ${
-                    scrolled ? 'text-blue-600' : 'text-white'
+                    scrolled ? 'text-white' : 'text-blue-600'
                 }`}>
-                    Printivo
+                    Web3Bridge 
                 </Link>
 
                 <button
                     onClick={() => setIsOpen(!isOpen)}
                     className={`focus:outline-none md:hidden z-50 transition-colors ${
-                        scrolled ? 'text-blue-600' : 'text-white'
+                        scrolled ? 'text-white' : 'text-blue-600'
                     }`}
                     aria-label="menu"
                 >
@@ -79,62 +79,62 @@ const Navbar = () => {
                     <div className="flex flex-col md:flex-row p-4 md:p-0">
                         <div className="flex flex-col md:flex-row md:mr-4">
                             <Link
-                                to="#"
+                                to="printivo"
                                 onClick={closeMenu}
                                 className={`py-2 px-4 hover:text-gray-400 hover:underline text-xl ${
-                                    scrolled ? 'text-white md:text-white' : 'text-white md:text-white'
+                                    scrolled ? 'text-white md:text-white' : 'text-white md:text-blue-600'
                                 }`}
                             >
-                                All products
+                                Printivo
                             </Link>
                             <Link
-                                to="#"
+                                to="schoolportal"
                                 onClick={closeMenu}
                                 className={`py-2 px-4 hover:text-gray-400 hover:underline text-xl ${
-                                    scrolled ? 'text-white md:text-white' : 'text-white md:text-white'
+                                    scrolled ? 'text-white md:text-white' : 'text-white md:text-blue-600'
                                 }`}
                             >
-                                Become a Reseller
+                                SchoolPortal
                             </Link>
-                            <Link
-                                to="#"
+                            {/* <Link
+                                to="contact"
                                 onClick={closeMenu}
                                 className={`py-2 px-4 hover:text-gray-400 hover:underline text-xl ${
-                                    scrolled ? 'text-white md:text-white' : 'text-white md:text-white'
+                                    scrolled ? 'text-white md:text-white' : 'text-white md:text-blue-600'
                                 }`}
                             >
                                 Merch Store
-                            </Link>
-                            <Link
-                                to="#"
+                            </Link> */}
+                            {/* <Link
+                                to="contact"
                                 onClick={closeMenu}
                                 className={`py-2 px-4 hover:text-gray-400 hover:underline text-xl ${
-                                    scrolled ? 'text-white md:text-white' : 'text-white md:text-white'
+                                    scrolled ? 'text-white md:text-white' : 'text-white md:text-blue-600'
                                 }`}
                             >
                                 Marketplace 
-                            </Link>
-                            <Link
-                                to="#"
+                            </Link> */}
+                            {/* <Link
+                                to="contact"
                                 onClick={closeMenu}
                                 className={`py-2 px-4 hover:text-gray-400 hover:underline text-xl ${
-                                    scrolled ? 'text-white md:text-white' : 'text-white md:text-white'
+                                    scrolled ? 'text-white md:text-white' : 'text-white md:text-blue-600'
                                 }`}
                             >
                                 Sign in
-                            </Link>
-                            <Link
-                                to="#"
+                            </Link> */}
+                            {/* <Link
+                                to="contact"
                                 onClick={closeMenu}
                                 className={`py-2 px-4 hover:text-gray-400 hover:underline text-xl ${
-                                    scrolled ? 'text-white md:text-white' : 'text-white md:text-white'
+                                    scrolled ? 'text-white md:text-white' : 'text-white md:text-blue-600'
                                 }`}
                             >
                                 create Account
-                            </Link>
+                            </Link> */}
                         </div>
 
-                        <div className="flex justify-center md:justify-center md:items-center space-x-4 mt-4 md:mt-0 border-t md:border-t-0 pt-4 md:pt-0">
+                        {/* <div className="flex justify-center md:justify-center md:items-center space-x-4 mt-4 md:mt-0 border-t md:border-t-0 pt-4 md:pt-0">
                             {[
                                 { icon:  FaShoppingCart, url: 'https://github.com/Otenevictor' }
                                
@@ -145,13 +145,13 @@ const Navbar = () => {
                                     target="_blank"
                                     onClick={closeMenu}
                                     className={`hover:text-gray-400 ${
-                                        scrolled ? 'text-white md:text-white' : 'text-white md:text-white'
+                                        scrolled ? 'text-white md:text-white' : 'text-white md:text-blue-600'
                                     }`}
                                 >
                                     <social.icon className="text-2xl" />
                                 </Link>
                             ))}
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
@@ -159,4 +159,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default HomeNav;

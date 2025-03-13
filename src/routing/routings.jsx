@@ -1,22 +1,30 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import HomePage from '../component/home';
-// import AboutPage from '../component/about';
-// import ProjectsPage from '../component/project';
-// import ContactPage from '../component/contact';
+import Printivo from '../pages/Printivo';
+import { NotFound } from '../pages/NotFound';
+import HomePage from '../pages/HomePage';
+import SchoolPortal from '../pages/schoolportal';
+import Dashboard from '../studentportal/dashboard';
+import ProtectedRoute from '../studentportal/protectedRoute';
+
+
 
 
 
 function RouteApp() {
   return (
     <>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            {/* <Route path="/about" element={<AboutPage/>} />
-            <Route path="/projects" element={<ProjectsPage/>} />
-            <Route path="/contact" element={<ContactPage/>} /> */}
-          </Routes>
- 
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/printivo" element={<Printivo />} />
+        <Route path="/schoolportal" element={<SchoolPortal />} />
+        <Route path="/dashboard" element={ <ProtectedRoute>  <Dashboard/> </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
+
+      </Routes>
+
     </>
   )
 }

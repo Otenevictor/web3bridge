@@ -1,13 +1,22 @@
 
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-const HomePage = () => {
+import Navbar from '../components/nav';
+import Products from '../components/products';
+import Footer from '../components/footer';
+import HomeNav from '../components/HomeNav';
+
+
+const Printivo = () => {
     const navigate = useNavigate();
     return (
-
+<>
+{/* <HomeNav/> */}
         <div className="min-h-screen pt-20">
+    <Navbar/>
+
             {/* Hero Section */}
-            <section className="flex flex-col md:flex-row items-center min-h-screen p-4 md:p-8 bg-gray-50">
+            <section className="flex flex-col md:flex-row items-center min-h-screen p-4 md:p-8 bg-[#ece8d9]">
                 <div className="w-full md:w-1/2 mb-8 md:mb-0 pr-0 md:pr-8">
                     <h1 className="text-4xl md:text-6xl font-bold mb-4"><span className="text-blue-600">Quality Prints</span></h1>
                     <h2 className="text-2xl md:text-3xl text-gray-700 mb-6">Shipped to your doorstep</h2>
@@ -46,9 +55,12 @@ const HomePage = () => {
                 </div>
 
             </section>
+            <Products/>
         </div>
+        <Footer/>
+        </>
 
 );
 };
 
-export default HomePage;
+export default Printivo;
