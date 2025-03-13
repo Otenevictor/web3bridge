@@ -1,17 +1,33 @@
-// components/Dashboard.js - Dashboard component
-import React, { useState } from 'react';
+
+
+
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { generateStudents } from '../studentportal/generatestudent';
 import SubjectNavigation from './subject';
 import StudentTable from './studenttable';
 
-const Dashboard = ({ username, students, handleLogout }) => {
+const Dashboard = () => {
   const [activeSubject, setActiveSubject] = useState('All');
-  
-  // Filter students by subject
+  const [students, setStudents] = useState([]);
+  const navigate = useNavigate();
+  const username = localStorage.getItem('schoolPortalUsername') || '';
+
+  useEffect(() => {
+    setStudents(generateStudents());
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('schoolPortalUsername');
+    localStorage.removeItem('schoolPortalPassword');
+    localStorage.setItem('schoolPortalAutoLogin', 'false');
+    navigate('/schoolportal');
+  };
+
   const filteredStudents = activeSubject === 'All' 
     ? students 
     : students.filter(student => student.subjects.includes(activeSubject));
 
-  // Count students by subject
   const subjectCounts = {
     'Web2 Basic': students.filter(s => s.subjects.includes('Web2 Basic')).length,
     'Web2 Advance': students.filter(s => s.subjects.includes('Web2 Advance')).length,
@@ -20,8 +36,8 @@ const Dashboard = ({ username, students, handleLogout }) => {
   };
 
   return (
-    <div className="bg-gray-100 p-4 rounded-lg" >
-      <div className="flex justify-between items-center mb-6">
+    <div className="bg-gray-100 pt-20 rounded-lg p-10 ">
+      <div className="flex justify-between items-center  ">
         <h2 className="text-2xl font-bold">Student Dashboard</h2>
         <div className="flex items-center">
           <span className="mr-3">Welcome, {username}!</span>

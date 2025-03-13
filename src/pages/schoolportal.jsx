@@ -1,43 +1,28 @@
-// components/SchoolPortal.js - Main container component
+// SchoolPortal.js - Updated component
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AuthForms from '../studentportal/authform';
-import Dashboard from '../studentportal/dashboard';
-import { generateStudents } from '../studentportal/generatestudent';
 
 const SchoolPortal = () => {
-  // State for authentication and user management
-  const [isSignedUp, setIsSignedUp] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [authMode, setAuthMode] = useState('signup'); // 'signup' or 'login'
+  const [authMode, setAuthMode] = useState('signup');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [students, setStudents] = useState([]);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  // Generate dummy students
-  useEffect(() => {
-    setStudents(generateStudents());
-  }, []);
-
-  // Check if user is already registered and logged in
   useEffect(() => {
     const storedUsername = localStorage.getItem('schoolPortalUsername');
     const storedPassword = localStorage.getItem('schoolPortalPassword');
     
     if (storedUsername && storedPassword) {
-      setIsSignedUp(true);
-      setAuthMode('login');
-      
-      // Only auto-login if this is the first page load
+      setAuthMode('login'); // Default to login form if user exists
       const shouldAutoLogin = localStorage.getItem('schoolPortalAutoLogin') !== 'false';
       if (shouldAutoLogin) {
-        setIsLoggedIn(true);
-        setUsername(storedUsername);
+        navigate('/schoolportal/dashboard');
       }
     }
-  }, []);
+  }, [navigate]);
 
-  // Handle signup
   const handleSignup = (e) => {
     e.preventDefault();
     
@@ -49,12 +34,11 @@ const SchoolPortal = () => {
     localStorage.setItem('schoolPortalUsername', username);
     localStorage.setItem('schoolPortalPassword', password);
     localStorage.setItem('schoolPortalAutoLogin', 'true');
-    setIsSignedUp(true);
-    setIsLoggedIn(true);
+    setAuthMode('login'); // Switch to login after successful signup
     setError('');
+    navigate('/schoolportal/dashboard');
   };
 
-  // Handle login
   const handleLogin = (e) => {
     e.preventDefault();
     
@@ -62,54 +46,30 @@ const SchoolPortal = () => {
     const storedPassword = localStorage.getItem('schoolPortalPassword');
     
     if (username === storedUsername && password === storedPassword) {
-      setIsLoggedIn(true);
       localStorage.setItem('schoolPortalAutoLogin', 'true');
-      setError('');
+      navigate('/schoolportal/dashboard');
     } else {
       setError('Invalid username or password');
     }
   };
 
-  // Handle logout
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setUsername('');
-    setPassword('');
-    localStorage.setItem('schoolPortalAutoLogin', 'false');
-  };
-
-  // Toggle between signup and login forms
-  const toggleAuthMode = () => {
-    setAuthMode(authMode === 'login' ? 'signup' : 'login');
-    setError('');
-  };
-
   return (
-    <div className="min-h-screen bg-gray-50 p-4  " style={{ backgroundImage: "url('https://res.cloudinary.com/de5sm2jjl/image/upload/v1741712546/schoolportal_iyysgr.jpg')", backgroundSize: "cover", backgroundRepeat: "no-repeat" }}>
+    <div className="min-h-screen bg-gray-50 p-4" style={{ backgroundImage: "url('https://res.cloudinary.com/de5sm2jjl/image/upload/v1741712546/schoolportal_iyysgr.jpg')", backgroundSize: "cover", backgroundRepeat: "no-repeat" }}>
       <div className="max-w-6xl mx-auto">
-      <header className="flex justify-between items-center py-4 mb-6">
-      <h1 className="text-3xl font-bold text-white">School Portal</h1>
-    </header>
-        {!isLoggedIn ? (
-          <AuthForms 
-            authMode={authMode}
-            username={username}
-            password={password}
-            error={error}
-            isSignedUp={isSignedUp}
-            setUsername={setUsername}
-            setPassword={setPassword}
-            handleSignup={handleSignup}
-            handleLogin={handleLogin}
-            toggleAuthMode={toggleAuthMode}
-          />
-        ) : (
-          <Dashboard 
-            username={username}
-            students={students}
-            handleLogout={handleLogout}
-          />
-        )}
+        <header className="flex justify-between items-center py-4 mb-6">
+          <h1 className="text-3xl font-bold text-white">School Portal</h1>
+        </header>
+        <AuthForms 
+          authMode={authMode}
+          username={username}
+          password={password}
+          error={error}
+          setUsername={setUsername}
+          setPassword={setPassword}
+          handleSignup={handleSignup}
+          handleLogin={handleLogin}
+          toggleAuthMode={() => setAuthMode(mode => mode === 'login' ? 'signup' : 'login')}
+        />
       </div>
     </div>
   );

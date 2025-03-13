@@ -1,13 +1,11 @@
-// components/ProtectedRoute.js - New component for protected routes
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ isAuthenticated, children, redirectPath }) => {
-  if (!isAuthenticated) {
-    return <Navigate to={redirectPath} replace />;
-  }
+const ProtectedRoute = ({ children }) => {
+  const isAuthenticated = localStorage.getItem('schoolPortalUsername') &&
+    localStorage.getItem('schoolPortalPassword');
 
-  return children;
+  return isAuthenticated ? children : <Navigate to="/schoolportal" replace />;
 };
 
 export default ProtectedRoute;
