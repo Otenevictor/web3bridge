@@ -21,7 +21,7 @@ const MusicPlayer = ({
           <div className="h-0.5 w-full bg-[#f1be32]"></div>
           <div className="h-0.5 w-full bg-[#f1be32]"></div>
         </div>
-        <h1 className="text-white m-0 mx-2 font-mono text-base">BlessedApp</h1>
+        <h1 className="text-white m-0 mx-2 text-2xl font-mono ">Blessed musicApp</h1>
         <div className="flex flex-wrap gap-1 px-1">
           <div className="h-0.5 w-full bg-[#f1be32]"></div>
           <div className="h-0.5 w-full bg-[#f1be32]"></div>
