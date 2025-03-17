@@ -96,15 +96,15 @@ const HomeNav = () => {
                             >
                                 SchoolPortal
                             </Link>
-                            {/* <Link
-                                to="contact"
+                            <Link
+                                to="music"
                                 onClick={closeMenu}
                                 className={`py-2 px-4 hover:text-gray-400 hover:underline text-xl ${
                                     scrolled ? 'text-white md:text-white' : 'text-white md:text-blue-600'
                                 }`}
                             >
-                                Merch Store
-                            </Link> */}
+                                MusicApp
+                            </Link>
                             {/* <Link
                                 to="contact"
                                 onClick={closeMenu}

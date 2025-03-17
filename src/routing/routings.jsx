@@ -40,6 +40,7 @@ import SchoolPortal from '../pages/schoolportal';
 import Dashboard from '../studentportal/dashboard';
 import ProtectedRoute from '../studentportal/protectedRoute';
 import SignupForm from '../studentportal/signup';
+import MusicApp from '../pages/MusicApp';
 
 function RouteApp() {
   return (
@@ -47,6 +48,7 @@ function RouteApp() {
       <Route path="/" element={<HomePage />} />
       <Route path="/printivo" element={<Printivo />} />
       <Route path="/sigupform" element={<SignupForm />} />
+      <Route path="/music" element={<MusicApp />} />
       <Route path="/schoolportal">
         <Route index element={<SchoolPortal />} />
         <Route 
