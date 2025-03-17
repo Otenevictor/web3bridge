@@ -12,12 +12,13 @@ function MusicApp() {
   const audioRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchMusic = async () => {
       try {
         // setLoading(true);
-        const response = await axios.get('https://robo-music-api.onrender.com/music/my-api');
+        const response = await axios.get(API_URL);
         setSongs(response.data);
         setLoading(false);
       } catch (err) {
@@ -136,7 +137,7 @@ function MusicApp() {
 
   return (
     <div className="min-h-screen bg-[#4d4d62] bg-cover bg-center bg-no-repeat pt-20 pb-10"
-      style={{ backgroundImage: `url('https://res.cloudinary.com/de5sm2jjl/image/upload/v1675071001/cld-sample-4.jpg')` }}>
+      style={{ backgroundImage: `url('https://res.cloudinary.com/de5sm2jjl/image/upload/v1742242477/vecteezy_close-up-of-a-white-piano-keyboard_48174245_zdgl7i.jpg')` }}>
       <div className="container mx-auto pt-10 flex flex-col items-center justify-center space-y-5">
         <audio
           ref={audioRef}
