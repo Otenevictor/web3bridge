@@ -1,10 +1,11 @@
 import React from 'react';
+import CountdownTimer from './MusicDuration';
 
-const Playlist = ({ songs, currentSongIndex, onSongSelect, isPlaying, duration }) => {
+const Playlist = ({ songs, currentSongIndex, onSongSelect, isPlaying, duration, onSongComplete }) => {
   if (!songs || songs.length === 0) {
     return null;
   }
-
+  
   const formatDuration = (seconds) => {
     if (!seconds || isNaN(seconds) || seconds === 0) return "0:00";
     
@@ -12,13 +13,24 @@ const Playlist = ({ songs, currentSongIndex, onSongSelect, isPlaying, duration }
     const remainingSeconds = Math.floor(seconds % 60);
     return `${minutes}:${remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds}`;
   };
-
+  
   return (
-    <div className="w-full max-w-md bg-[#1b1b32] border-3 border-[#3b3b4f] rounded-md overflow-hidden">
+    <div className="w-full max-w-md bg-[#1b1b32] border border-[#3b3b4f] rounded-md overflow-hidden">
       <div className="flex justify-between items-center px-4 py-2 bg-[#3b3b4f]">
         <h2 className="text-white font-mono text-lg">Playlist</h2>
         <span className="text-[#f1be32] text-sm">{songs.length} songs</span>
       </div>
+      
+      {/* Countdown timer display */}
+      {currentSongIndex !== null && (
+        <div className="bg-[#3b3b4f] px-4 py-2 flex justify-center">
+          <CountdownTimer
+            duration={duration} 
+            isPlaying={isPlaying} 
+            onComplete={onSongComplete}
+          />
+        </div>
+      )}
       
       <div className="max-h-96 overflow-y-auto">
         {songs.map((song, index) => (
@@ -31,8 +43,8 @@ const Playlist = ({ songs, currentSongIndex, onSongSelect, isPlaying, duration }
           >
             <div className="flex-shrink-0 mr-3">
               <img 
-                src={song.cover || "https://via.placeholder.com/40"} 
-                alt={song.title} 
+                src={song.cover || "https://via.placeholder.com/40"}
+                alt={song.title}
                 className="w-10 h-10 object-cover"
               />
             </div>
