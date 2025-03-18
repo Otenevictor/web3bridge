@@ -17,7 +17,7 @@ function MusicApp() {
   useEffect(() => {
     const fetchMusic = async () => {
       try {
-        // setLoading(true);
+        setLoading(true);
         const response = await axios.get(API_URL);
         setSongs(response.data);
         setLoading(false);
